@@ -5,6 +5,8 @@
 הכל מחולק לנושאים אז תוכלו להוציא בדיוק את מה שאתם צריכים.
 
 - [חומר עזר לבגרות במדעי המחשב](#חומר-עזר-לבגרות-במדעי-המחשב)
+  - [מיונים](#מיונים)
+  - [חיפושים](#חיפושים)
   - [Stack](#stack)
     - [API](#api)
     - [ציור](#ציור)
@@ -17,6 +19,121 @@
     - [API](#api-2)
     - [ציור](#ציור-2)
     - [פעולות](#פעולות-2)
+
+## מיונים
+
+```cs
+/// <summary>
+/// Merges two sorted arrays
+/// Time complexity: O(n + m), n = first array length, m = second array length
+/// </summary>
+/// <param name="a"> First array </param>
+/// <param name="b"> Second array </param>
+/// <returns> Merged array from both arrays </returns>
+public static int[] MergeSorted(int[] a, int[] b)
+{
+    int[] c = new int[a.Length + b.Length];
+    for (int indexA = 0, indexB = 0, indexC = 0; indexC < c.Length; indexC++)
+    {
+        if (indexA < a.Length && indexB < b.Length && a[indexA] > b[indexB])
+        {
+            c[indexC] = b[indexB];
+            indexB++;
+        }
+        else if (indexA < a.Length)
+        {
+            c[indexC] = a[indexA];
+            indexA++;
+        }
+        else
+            c[indexC] = b[indexB];
+    }
+    return c;
+}
+```
+
+```cs
+/// <summary>
+/// Sorts an array
+/// Time complexity: O(n ^ 2), n = array length
+/// </summary>
+/// <param name="arr"> The given array </param>
+/// <returns> The given array, sorted </returns>
+public static int[] BubbleSort(int[] arr)
+{
+    for (int write = 0; write < arr.Length; write++)
+        for (int sort = 0; sort < arr.Length - 1; sort++)
+            if (arr[sort] > arr[sort + 1])
+            {
+                temp = arr[sort + 1];
+                arr[sort + 1] = arr[sort];
+                arr[sort] = temp;
+            }
+    return arr;
+}
+```
+
+```cs
+/// <summary>
+/// Sorts an array using Counting Sort
+/// 
+/// n - 's'
+/// O(n)
+/// </summary>
+/// <param name="arr">The array to sort</param>
+/// <param name="k">The numbers' range</param>
+/// <returns>The sorted array</returns>
+public static int[] SortWithCounting(int[] arr, int k)
+{
+    // output - The resulting array
+    int[] output = new int[arr.Length];
+    // count - A temporary counting array
+    int[] count = new int[k];
+
+    for (int i = 0; i < count.Length; i++)
+        count[i] = 0;
+
+    for (int i = 0; i < arr.Length; i++)
+        count[arr[i]]++;
+
+    for (int i = 1; i < count.Length; i++)
+        count[i] += count[i - 1];
+
+    for (int i = 0; i < arr.Length; i++)
+    {
+        output[count[arr[i]] - 1] = arr[i];
+        count[arr[i]]--;
+    }
+
+    return output;
+}
+```
+
+## חיפושים
+
+```cs
+/// <summary>
+/// Searches given value
+/// Time complexity: O(log2 n), n = array length
+/// </summary>
+/// <param name="arr"> The given array </param>
+/// <returns> Index of given key if exist in the array, else -1 </returns>
+public static int BinarySearch(int[] arr, int searchKey)
+{
+    int mid, max = arr.Length, min = 0;
+    while (min <= max)
+    {
+        mid = (max + min) / 2;
+        if (arr[mid] == searchKey)
+            return mid;
+        if (arr[mid] > searchKey)
+            max = mid - 1;
+        else if (arr[middle] < searchKey)
+            min = mid + 1;
+        return -1;
+    }
+}
+```
 
 ## Stack
 
