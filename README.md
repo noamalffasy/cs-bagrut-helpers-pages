@@ -264,6 +264,7 @@ public static int FindMin(Stack<int> s)
 /// Time complexity: O(n), n = the number of items in the source stack
 /// </summary>
 /// <param name="source"> The source stack </param>
+/// <param name="destination"> The destination stack </param>
 /// <returns> A new stack with the same content as the given stack </returns>
 public static Stack<T> CopyStack<T>(Stack<T> source, Stack<T> destination = null)
 {
@@ -287,8 +288,8 @@ public static Stack<T> CopyStack<T>(Stack<T> source, Stack<T> destination = null
 /// Takes a stack and putting its content in a different stack
 /// Time complexity: O(n), n = the number of items in the source stack
 /// </summary>
-/// <param name="from"> The source stack </param>
-/// <param name="to"> The target stack </param>
+/// <param name="source"> The source stack </param>
+/// <param name="destination"> The destination stack </param>
 /// <returns> A new stack with the same content as the given stack </returns>
 public static Stack<T> SpillStack<T>(Stack<T> source, Stack<T> destination = null)
 {
