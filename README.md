@@ -320,24 +320,6 @@ public static bool DeepEqual<T>(Stack<T> s1, Stack<T> s2)
 
 ```cs
 /// <summary>
-/// Checks if two stacks have the same items
-/// Time complexity: O(n * m), n = number of items in s1, m = number of items in s2
-/// </summary>
-/// <param name="s1"> The first source stack </param>
-/// <param name="s2"> The second source stack </param>
-/// <returns> True if both stacks have the same items, otherwise false </returns>
-public static bool DeepEqual<T>(Stack<T> s1, Stack<T> s2)
-{
-    Stack<T> temp = CopyStack(s1);
-    while (!temp.IsEmpty())
-        if (SearchStack(s2, temp.Pop()))
-            return true;
-    return false;
-}
-```
-
-```cs
-/// <summary>
 /// Searches an item in a given stack
 /// Time complexity: O(n), n = the number of items in the source stack
 /// </summary>
@@ -355,6 +337,28 @@ public static bool SearchStack<T>(Stack<T> source, T item)
     bool found = SearchStack(source, item);
     source.Push(top);
     return found;
+}
+```
+
+```cs
+public static int[] ToArray(Stack<int> stc)
+{
+    Stack<int> stc2 = new Stack<int>();
+
+    int counter = 0;
+    while (!stc.IsEmpty())
+    {
+        stc2.Push(stc.Pop());
+        counter++;
+    }
+    int[] arr = new int[counter];
+    while (!stc2.IsEmpty())
+    {
+        counter--;
+        arr[counter] = stc2.Top();
+        stc.Push(stc2.Pop());
+    }
+    return arr;
 }
 ```
 
