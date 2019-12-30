@@ -1,6 +1,5 @@
-# Computer Science Bagrut Helpers
+# חומר עזר לבגרות במדעי המחשב
 
-Here you can find code, images and basically everything needed for the bagrut test.
+אפשר למצוא כאן שורות קוד, תמונות, איורים ובעצם כל דבר שתצטרכו בשביל המבחן.
 
-Everything is divided to sections so you can take out exactly what you need
-
+הכל מחולק לנושאים אז תוכלו להוציא בדיוק את מה שאתם צריכים.
