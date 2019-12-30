@@ -5,8 +5,10 @@
 הכל מחולק לנושאים אז תוכלו להוציא בדיוק את מה שאתם צריכים.
 
 - [חומר עזר לבגרות במדעי המחשב](#חומר-עזר-לבגרות-במדעי-המחשב)
-  - [מיונים](#מיונים)
-  - [חיפושים](#חיפושים)
+  - [מערכים](#מערכים)
+    - [מציאת מינימום ומקסימום](#מציאת-מינימום-ומקסימום)
+    - [מיונים](#מיונים)
+    - [חיפושים](#חיפושים)
   - [Stack](#stack)
     - [API](#api)
     - [ציור](#ציור)
@@ -20,7 +22,85 @@
     - [ציור](#ציור-2)
     - [פעולות](#פעולות-2)
 
-## מיונים
+## מערכים
+
+### מציאת מינימום ומקסימום
+
+```cs
+/// <summary>
+/// Finds the minimum value of given array
+/// Time complexity: O(n), n = given array length
+/// </summary>
+/// <param name="arr"> The given array </param>
+/// <returns> The minimum value of given array </returns>
+public static int FindMin(int[] arr)
+{
+    int min = Int32.MaxValue;
+    for (int i = 0, i < arr.Length; i++)
+        if (arr[i] < min)
+            min = arr[i];
+    return min;
+}
+```
+
+```cs
+/// <summary>
+/// Finds the maximum value of given array
+/// Time complexity: O(n), n = given array length
+/// </summary>
+/// <param name="arr"> The given array </param>
+/// <returns> The maximum value of given array </returns>
+public static int FindMax(int[] arr)
+{
+    int max = Int32.MinValue;
+    for (int i = 0, i < arr.Length; i++)
+        if (arr[i] > max)
+            max = arr[i];
+    return max;
+}
+```
+
+```cs
+/// <summary>
+/// Finds the index of the minimum value of given array
+/// Time complexity: O(n), n = given array length
+/// </summary>
+/// <param name="arr"> The given array </param>
+/// <returns> The index of the minimum value of given array </returns>
+public static int FindIndexMin(int[] arr)
+{
+    int min = Int32.MaxValue, loc = 0;
+    for (int i = 0, i < arr.Length; i++)
+        if (arr[i] < min)
+        {
+            loc = i;
+            min = arr[i];
+        }
+    return loc;
+}
+```
+
+```cs
+/// <summary>
+/// Finds the index of the maximum value of given array
+/// Time complexity: O(n), n = given array length
+/// </summary>
+/// <param name="arr"> The given array </param>
+/// <returns> The index of the maximum value of given array </returns>
+public static int FindIndexMax(int[] arr)
+{
+    int max = Int32.MinValue, loc = 0;
+    for (int i = 0, i < arr.Length; i++)
+        if (arr[i] > max)
+        {
+            loc = i;
+            max = arr[i];
+        }
+    return loc;
+}
+```
+
+### מיונים
 
 ```cs
 /// <summary>
@@ -76,7 +156,7 @@ public static int[] BubbleSort(int[] arr)
 ```cs
 /// <summary>
 /// Sorts an array using Counting Sort
-/// 
+///
 /// n - 's'
 /// O(n)
 /// </summary>
@@ -109,7 +189,7 @@ public static int[] SortWithCounting(int[] arr, int k)
 }
 ```
 
-## חיפושים
+### חיפושים
 
 ```cs
 /// <summary>
