@@ -4,6 +4,12 @@
 
 הכל מחולק לנושאים אז תוכלו להוציא בדיוק את מה שאתם צריכים.
 
+- [חומר עזר לבגרות במדעי המחשב](#חומר-עזר-לבגרות-במדעי-המחשב)
+  - [Node](#node)
+    - [API](#api)
+    - [ציור](#ציור)
+    - [פעולות](#פעולות)
+
 ## Node
 
 ### API
@@ -53,5 +59,34 @@ public static int Size<T>(Node<T> node)
     }
 
     return num;
+}
+```
+
+```cs
+public static bool IsInNode<T>(Node<T> p, T val)
+{
+    if (p == null)
+        return false;
+    if (val.Equals(p.GetValue()))
+        return true;
+    return IsInList(p.GetNext(), val);
+}
+```
+
+```cs
+public static int MinValue(Node<int> p)
+{
+    if (!p.HasNext())
+        return int.MaxValue;
+    return Math.Min(p.GetValue(), MinValue(p.GetNext()));
+}
+```
+
+```cs
+public static int MaxValue(Node<int> p)
+{
+    if (!p.HasNext())
+        return int.MinValue;
+    return Math.Max(p.GetValue(), MaxValue(p.GetNext()));
 }
 ```
