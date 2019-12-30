@@ -11,10 +11,11 @@
     - [פעולות](#פעולות)
   - [Queue](#queue)
     - [API](#api-1)
+    - [ציור](#ציור-1)
     - [פעולות](#פעולות-1)
   - [Node](#node)
     - [API](#api-2)
-    - [ציור](#ציור-1)
+    - [ציור](#ציור-2)
     - [פעולות](#פעולות-2)
 
 ## Stack
@@ -32,7 +33,7 @@
 
 ### ציור
 
-![Stack](img/Stack.png)
+![Stack drawing](img/stack.png)
 
 ### פעולות
 
@@ -172,6 +173,10 @@ public static bool SearchStack<T>(Stack<T> source, T item)
 | מוציא ערך מהתור                           | `Remove(): T`        |
 | מחזיר את הערך הראשון של התור              | `Head(): T`          |
 | מחזיר כסטרינג את כל הערכים של התור ברשימה | `ToString(): string` |
+
+### ציור
+
+![Queue drawing](img/queue.png)
 
 ### פעולות
 
