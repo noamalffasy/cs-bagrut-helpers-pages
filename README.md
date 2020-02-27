@@ -554,7 +554,7 @@ public static int MaxValue(Node<int> p)
 
 ### API
 
-| פעולה                  | תיאור                                                 |
+| תיאור                  | פעולה                                                 |
 | ---------------------- | ----------------------------------------------------- |
 | עץ בעל שורש בלבד       | `BinNode(T value)`                                    |
 | עץ בעל שורש ושני ילדים | `BinNode(BinNode<T> left, T value, BinNode<T> right)` |
