@@ -726,14 +726,3 @@ public static int FindMin(BinNode<int> tr, int min = int.MaxValue)
     return Math.Min(FindMin(tr.GetLeft(), min), FindMin(tr.GetRight(), min));
 }
 ```
-
-```cs
-public static bool IsBinarySearchTree(BinNode<int> t, int min = Int32.MaxValue, int max = Int32.MinValue)
-{
-    if (t == null) return true;
-    if (t.HasLeft() && t.GetLeft().GetValue() >= min || t.HasRight() && t.GetRight().GetValue() < max) return false;
-    min = Math.Min(min, t.GetValue());
-    max = Math.Max(max, t.GetValue());
-    return IsBinarySearchTree(t.GetLeft(), min, max) || IsBinarySearchTree(t.GetRight(), min, max);
-}
-```
