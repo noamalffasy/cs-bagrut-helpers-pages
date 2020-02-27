@@ -21,6 +21,10 @@
     - [API](#api-2)
     - [ציור](#ציור-2)
     - [פעולות](#פעולות-2)
+  - [BinNode](#binnode)
+    - [API](#api-3)
+    - [ציור](#ציור-3)
+    - [פעולות](#פעולות-3)
 
 ## מערכים
 
@@ -539,5 +543,170 @@ public static int MaxValue(Node<int> p)
     if (!p.HasNext())
         return int.MinValue;
     return Math.Max(p.GetValue(), MaxValue(p.GetNext()));
+}
+```
+
+## BinNode
+
+- עץ מלא הוא עץ שכל צומת שלא עלה בעל שני בנים
+- בעץ מלא, יש קשר בין מספר הרמות למספר הצמתים. נגדיר מספר הרמות = h, מספר הצמתים = n, ונקבל את הקשר: h = log2(n), n = 2^h - 1
+
+### API
+
+| פעולה                  | תיאור                                                 |
+| ---------------------- | ----------------------------------------------------- |
+| עץ בעל שורש בלבד       | `BinNode(T value)`                                    |
+| עץ בעל שורש ושני ילדים | `BinNode(BinNode<T> left, T value, BinNode<T> right)` |
+| מחזיר את הערך של העץ   | `GetValue(): T`                                       |
+| שם את הערך של העץ      | `SetValue(T value)`                                   |
+| מחזיר את הבן השמאלי של העץ | `GetLeft(): BinNode<T>`                           |
+| שם את הבן השמאלי של העץ    | `SetLeft(BinNode<T> value)`                       |  
+| בודק אם יש בן שמאלי לעץ    | `HasLeft(): bool`                                 |
+| מחזיר את הבן הימני של העץ  | `GetRight(): BinNode<T>`                          |
+| שם את הבן הימני של העץ     | `SetRight(BinNode<T> value)`                      |
+| בודק אם יש בן ימני         | `HasRight(): bool`                                |
+| מחזיר כסטרינג את הערך של העץ הנוכחי | `ToString(): string`                     |
+
+### ציור
+
+#[Tree drawing](img/tree.png)
+
+### פעולות
+
+```cs
+public static bool IsLeaf<T>(BinNode<T> t)
+{
+    return !t.HasLeft() && !t.HasRight();
+}
+
+public static int CountLeaves<T>(BinNode<T> t)
+{
+    if (t == null) return 0;
+    if (IsLeaf(t)) return 1;
+    return CountLeaves(t.GetLeft()) + CountLeaves(t.GetRight());
+}
+```
+
+```cs
+public static int TreeHeight<T>(BinNode<T> t)
+{
+    if (t == null) return -1;
+    return 1 + Math.Max(TreeHeight(t.GetRight()), TreeHeight(t.GetLeft()));
+}
+```
+
+```cs
+public static void InsertToBinarySearchTree(BinNode<int> t, int[] values)
+{
+    foreach (int value in values)
+        InsertToBinarySearchTree(t, value);
+}
+
+public static void InsertToBinarySearchTree(BinNode<int> t, int value)
+{
+    if (t != null)
+    {
+        if (value < t.GetValue())
+        {
+            if (!t.HasLeft())
+                t.SetLeft(new BinNode<int>(value));
+            else
+                InsertToBinarySearchTree(t.GetLeft(), value);
+        }
+        else
+        {
+            if (!t.HasRight())
+                t.SetRight(new BinNode<int>(value));
+            else
+                InsertToBinarySearchTree(t.GetRight(), value);
+        }
+    }
+}
+
+public static BinNode<int> CreateBinarySearchTree(int[] values)
+{
+    BinNode<int> t = new BinNode<int>(values[0]);
+    for (int i = 1; i < values.Length; i++)
+        InsertToBinarySearchTree(t, values[i]);
+    return t;
+}
+
+public static BinNode<int> CreateBinarySearchTree(Queue<int> q)
+{
+    BinNode<int> t = new BinNode<int>(q.Remove());
+    while (!q.IsEmpty())
+        InsertToBinarySearchTree(t, q.Remove());
+    return t;
+}
+```
+
+```cs
+public static bool SearchBinarySearchTree(BinNode<int> t, int value)
+{
+    if (t == null) return false;
+    if (t.GetValue() == value) return true;
+    if (value < t.GetValue())
+        return SearchBinarySearchTree(t.GetLeft(), value);
+    return SearchBinarySearchTree(t.GetRight(), value);
+}
+```
+
+```cs
+public static void PrintLevelOrder<T>(BinNode<T> t)
+{
+    BinNode<T> curr;
+    Queue<BinNode<T>> q = new Queue<BinNode<T>>();
+    if (t != null)
+    {
+        q.Insert(t);
+        while (!q.IsEmpty())
+        {
+            curr = q.Remove();
+            Console.Write($"{curr.GetValue()} ");
+            if (curr.HasLeft())
+                q.Insert(curr.GetLeft());
+            if (curr.HasRight())
+                q.Insert(curr.GetRight());
+        }
+        Console.WriteLine();
+    }
+    else
+        Console.WriteLine("null");
+}
+```
+
+```cs
+public static void PrintMidOrder<T>(BinNode<T> t)
+{
+    if (t != null)
+    {
+        PrintMidOrder(t.GetLeft());
+        Console.Write($"{t.GetValue()} ");
+        PrintMidOrder(t.GetRight());
+    }
+}
+```
+
+```cs
+public static void PrintPostOrder<T>(BinNode<T> t)
+{
+    if (t != null)
+    {
+        PrintPostOrder(t.GetLeft());
+        PrintPostOrder(t.GetRight());
+        Console.Write($"{t.GetValue()}");
+    }
+}
+```
+
+```cs
+public static void PrintPreOrder<T>(BinNode<T> t)
+{
+    if (t != null)
+    {
+        Console.Write($"{t.GetValue()}");
+        PrintPreOrder(t.GetLeft());
+        PrintPreOrder(t.GetRight());
+    }
 }
 ```
