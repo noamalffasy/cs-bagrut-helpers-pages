@@ -550,7 +550,13 @@ public static int MaxValue(Node<int> p)
 
 - עלה הוא צומת בעץ אשר אין לו בנים כלל
 - עץ מלא הוא עץ שכל צומת שלא עלה בעל שני בנים
-- &#x202b;בעץ מלא, יש קשר בין מספר הרמות למספר הצמתים. נגדיר מספר הרמות = h, מספר הצמתים = n, ונקבל את הקשר: h = log2(n) ,n = 2^h - 1
+- &#x202b;בעץ מלא, יש קשר בין מספר הרמות למספר הצמתים
+
+   &#x202b;נגדיר מספר הרמות = h, מספר הצמתים = n, ונקבל את הקשר: 
+    
+   ![h=log_2(n+1)](https://latex.codecogs.com/png.latex?\inline&space;\dpi{120}&space;h=\log_2(n&plus;1))
+
+   ![n=2^h-1](https://latex.codecogs.com/png.latex?\inline&space;\dpi{120}&space;n=2^h-1)
 
 ### API
 
