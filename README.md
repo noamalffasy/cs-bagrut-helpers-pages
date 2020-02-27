@@ -717,3 +717,12 @@ public static void PrintPreOrder<T>(BinNode<T> t)
     }
 }
 ```
+
+```cs
+public static int FindMin(BinNode<int> tr, int min = int.MaxValue)
+{
+    if (tr == null) return min;
+    if (tr.GetValue() < min) min = tr.GetValue();
+    return Math.Min(FindMin(tr.GetLeft(), min), FindMin(tr.GetRight(), min));
+}
+```
