@@ -569,7 +569,7 @@ public static int MaxValue(Node<int> p)
 
 ### ציור
 
-#[Tree drawing](img/tree.png)
+![Tree drawing](img/tree.png)
 
 ### פעולות
 
