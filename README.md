@@ -282,7 +282,9 @@ public static Stack<T> CopyStack<T>(Stack<T> source, Stack<T> destination = null
         destination.Push(source.Pop());
     }
 
-    SpillStack(temp, source);
+    while (!temp.IsEmpty())
+        source.Push(temp.Pop());
+
     return destination;
 }
 ```
@@ -315,11 +317,22 @@ public static Stack<T> SpillStack<T>(Stack<T> source, Stack<T> destination = nul
 /// <returns> True if both stacks have the same items, otherwise false </returns>
 public static bool DeepEqual<T>(Stack<T> s1, Stack<T> s2)
 {
-    Stack<T> temp = CopyStack(s1);
-    while (!temp.IsEmpty())
-        if (SearchStack(s2, temp.Pop()))
-            return true;
-    return false;
+    if (s1.IsEmpty() && s2.IsEmpty()) return true;
+    if ((s1.IsEmpty() && !s2.IsEmpty()) || (!s1.IsEmpty() && s2.IsEmpty())) return false;
+
+    T item1 = s1.Pop();
+    T item2 = s2.Pop();
+    bool result = false;
+
+    if (item1.Equals(item2))
+    {
+        result = DeepEqual(s1, s2);
+    }
+
+    s1.Push(item1);
+    s1.Push(item2);
+
+    return result;
 }
 ```
 
@@ -335,12 +348,17 @@ public static bool SearchStack<T>(Stack<T> source, T item)
 {
     if (source.IsEmpty())
         return false;
-    T top = source.Top();
-    if (item.Equals(top))
-        return true;
-    source.Pop();
-    bool found = SearchStack(source, item);
-    source.Push(top);
+
+    T curr = source.Pop();
+    bool found = false;
+
+    if (item.Equals(curr))
+        found = true;
+
+    found = found || SearchStack(source, item);
+
+    source.Push(curr);
+
     return found;
 }
 ```
@@ -552,27 +570,27 @@ public static int MaxValue(Node<int> p)
 - עץ מלא הוא עץ שכל צומת שלא עלה בעל שני בנים
 - &#x202b;בעץ מלא, יש קשר בין מספר הרמות למספר הצמתים
 
-   &#x202b;נגדיר מספר הרמות = h, מספר הצמתים = n, ונקבל את הקשר: 
-    
-   ![h=log_2(n+1)](https://latex.codecogs.com/png.latex?\inline&space;\dpi{120}&space;h=\log_2(n&plus;1))
+  &#x202b;נגדיר מספר הרמות = h, מספר הצמתים = n, ונקבל את הקשר:
 
-   ![n=2^h-1](https://latex.codecogs.com/png.latex?\inline&space;\dpi{120}&space;n=2^h-1)
+  ![h=log_2(n+1)](<https://latex.codecogs.com/png.latex?\inline&space;\dpi{120}&space;h=\log_2(n+1)>)
+
+  ![n=2^h-1](https://latex.codecogs.com/png.latex?\inline&space;\dpi{120}&space;n=2^h-1)
 
 ### API
 
-| תיאור                  | פעולה                                                 |
-| ---------------------- | ----------------------------------------------------- |
-| עץ בעל שורש בלבד       | `BinNode(T value)`                                    |
-| עץ בעל שורש ושני ילדים | `BinNode(BinNode<T> left, T value, BinNode<T> right)` |
-| מחזיר את הערך של העץ   | `GetValue(): T`                                       |
-| שם את הערך של העץ      | `SetValue(T value)`                                   |
-| מחזיר את הבן השמאלי של העץ | `GetLeft(): BinNode<T>`                           |
-| שם את הבן השמאלי של העץ    | `SetLeft(BinNode<T> value)`                       |  
-| בודק אם יש בן שמאלי לעץ    | `HasLeft(): bool`                                 |
-| מחזיר את הבן הימני של העץ  | `GetRight(): BinNode<T>`                          |
-| שם את הבן הימני של העץ     | `SetRight(BinNode<T> value)`                      |
-| בודק אם יש בן ימני         | `HasRight(): bool`                                |
-| מחזיר כסטרינג את הערך של העץ הנוכחי | `ToString(): string`                     |
+| תיאור                               | פעולה                                                 |
+| ----------------------------------- | ----------------------------------------------------- |
+| עץ בעל שורש בלבד                    | `BinNode(T value)`                                    |
+| עץ בעל שורש ושני ילדים              | `BinNode(BinNode<T> left, T value, BinNode<T> right)` |
+| מחזיר את הערך של העץ                | `GetValue(): T`                                       |
+| שם את הערך של העץ                   | `SetValue(T value)`                                   |
+| מחזיר את הבן השמאלי של העץ          | `GetLeft(): BinNode<T>`                               |
+| שם את הבן השמאלי של העץ             | `SetLeft(BinNode<T> value)`                           |
+| בודק אם יש בן שמאלי לעץ             | `HasLeft(): bool`                                     |
+| מחזיר את הבן הימני של העץ           | `GetRight(): BinNode<T>`                              |
+| שם את הבן הימני של העץ              | `SetRight(BinNode<T> value)`                          |
+| בודק אם יש בן ימני                  | `HasRight(): bool`                                    |
+| מחזיר כסטרינג את הערך של העץ הנוכחי | `ToString(): string`                                  |
 
 ### ציור
 
