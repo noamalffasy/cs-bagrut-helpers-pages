@@ -542,7 +542,7 @@ public static bool IsInNode<T>(Node<T> p, T val)
         return false;
     if (val.Equals(p.GetValue()))
         return true;
-    return IsInList(p.GetNext(), val);
+    return IsInNode(p.GetNext(), val);
 }
 ```
 
