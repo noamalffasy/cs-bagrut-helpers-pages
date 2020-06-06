@@ -744,3 +744,36 @@ public static int FindMin(BinNode<int> tr, int min = int.MaxValue)
     return Math.Min(FindMin(tr.GetLeft(), min), FindMin(tr.GetRight(), min));
 }
 ```
+
+```cs
+public static int LeftSonsSum(BinNode<int> t)
+{
+    if(t == null)
+        return 0;
+    if(t.HasLeft())
+        t.GetLeft().GetValue() + LeftSonsSum(t.GetRight()) + LeftSonsSum(t.GetLeft());
+    return LeftSonsSum(t.GetRight()) + LeftSonsSum(t.GetLeft());
+}
+```
+
+```cs
+public static int RightSonsSum(BinNode<int> t)
+{
+    if(t == null)
+        return 0;
+    if(t.HasRight())
+        t.GetRight().GetValue() + RightSonsSum(t.GetRight()) + RightSonsSum(t.GetLeft());
+    return RightSonsSum(t.GetRight()) + RightSonsSum(t.GetLeft());
+}
+```
+
+```cs
+public static int SumLeaves(BinNode<int> t)
+{
+    if (t == null)
+        return 0;
+    if(!t.HasLeft() && !t.HasRight())
+        return t.GetValue();
+    return SumLeaves(t.GetRight()) + SumLeaves(t.GetLeft());
+}
+```
