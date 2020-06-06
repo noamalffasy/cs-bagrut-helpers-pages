@@ -449,21 +449,23 @@ public static Queue<T> CopyQueue<T>(Queue<T> source, Queue<T> result = null)
 /// </summary>
 /// <param name="source"> The source queue </param>
 /// <returns> The number of items in the queue </returns>
-public static int QueueSize<T>(Queue<T> source)
+public static int QueueSize<T>(Queue<T> q)
 {
-    int size = QueueSize(source, 0);
-    FlipQueue(source);
-    return size;
-}
+    // temp - A temporary queue
+    Queue<T> temp = new Queue<T>();
+    // size - The queue's size
+    int size = 0;
 
-public static int QueueSize<T>(Queue<T> source, int counter = 0)
-{
-    if (source.IsEmpty())
-        return 0;
-    T temp = source.Remove();
-    counter = 1 + QueueSize(source, 0);
-    source.Insert(temp);
-    return counter;
+    while (!q.IsEmpty())
+    {
+        temp.Insert(q.Remove());
+        size++;
+    }
+
+    while (!temp.IsEmpty())
+        q.Insert(temp.Remove());
+
+    return size;
 }
 ```
 
