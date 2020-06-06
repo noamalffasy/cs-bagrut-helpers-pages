@@ -753,7 +753,7 @@ public static int LeftSonsSum(BinNode<int> t)
     if(t == null)
         return 0;
     if(t.HasLeft())
-        t.GetLeft().GetValue() + LeftSonsSum(t.GetRight()) + LeftSonsSum(t.GetLeft());
+        return t.GetLeft().GetValue() + LeftSonsSum(t.GetRight()) + LeftSonsSum(t.GetLeft());
     return LeftSonsSum(t.GetRight()) + LeftSonsSum(t.GetLeft());
 }
 ```
@@ -764,7 +764,7 @@ public static int RightSonsSum(BinNode<int> t)
     if(t == null)
         return 0;
     if(t.HasRight())
-        t.GetRight().GetValue() + RightSonsSum(t.GetRight()) + RightSonsSum(t.GetLeft());
+        return t.GetRight().GetValue() + RightSonsSum(t.GetRight()) + RightSonsSum(t.GetLeft());
     return RightSonsSum(t.GetRight()) + RightSonsSum(t.GetLeft());
 }
 ```
